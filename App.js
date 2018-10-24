@@ -18,8 +18,8 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-  static dlVideoToMp3(videoUrl){
-    Alert.alert(videoUrl)
+  static dlVideoToMp3(){
+    Alert.alert("salut")
   }
 
   render() {
@@ -28,7 +28,7 @@ export default class App extends Component<Props> {
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
-        <Button title={"click me"} onPress={App.dlVideoToMp3("https://youtu.be/g2N0TkfrQhY")}/>
+        <Button title={"click me"} onPress={App.dlVideoToMp3}/>
       </View>
     );
   }
