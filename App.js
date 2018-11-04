@@ -8,6 +8,8 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button, Alert} from 'react-native';
+import RNFetchBlob from 'rn-fetch-blob'
+import { PermissionsAndroid } from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,20 +20,58 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-  static dlVideoToMp3(){
-    Alert.alert("salut")
-  }
+    async requestFileStoragePermission() {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                {
+                    'title': 'Cool music App Camera Permission',
+                    'message': 'Cool music App needs access to your file storage ' +
+                        'so we can stock your downloaded files.'
+                }
+            )
+            return granted === PermissionsAndroid.RESULTS.GRANTED;
+        } catch (err) {
+            console.warn(err)
+            return false
+        }
+    }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <Button title={"click me"} onPress={App.dlVideoToMp3}/>
-      </View>
-    );
-  }
+    dlVideoToMp3(youtubeUrl, fileName){
+        this.requestFileStoragePermission().then(result => {
+            if (result){
+                const apiUrl = `https://master-project-api.herokuapp.com/api/dl/${encodeURIComponent(youtubeUrl)}/${encodeURIComponent(fileName)}`;
+                const { config, fs } = RNFetchBlob;
+                const musicDirs = fs.dirs.MusicDir;
+                let options = {
+                    fileCache: true,
+                    addAndroidDownloads : {
+                        useDownloadManager : true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
+                        notification : false,
+                        path:  musicDirs + `/${fileName}.mp3`, // this is the path where your downloaded file will live in
+                        description : 'Downloading music.'
+                    }
+                };
+                config(options).fetch('GET', apiUrl).then((res) => {
+                    Alert.alert("download completed?")
+                })
+            }else{
+                Alert.alert("We can't do anything without your consent...")
+            }
+        }
+        )
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.welcome}>Welcome to React Native!</Text>
+                <Text style={styles.instructions}>To get started, edit App.js</Text>
+                <Text style={styles.instructions}>{instructions}</Text>
+                <Button title={"click me"} onPress={() => this.dlVideoToMp3("https://youtu.be/rY0WxgSXdEE", "biteDust")}/>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
