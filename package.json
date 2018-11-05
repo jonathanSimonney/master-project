@@ -7,13 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-preset-react-native": "5.0.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
     "rn-fetch-blob": "^0.10.13"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
-    "babel-preset-react-native": "^5",
     "jest": "23.6.0",
     "react-test-renderer": "16.4.1"
   },
