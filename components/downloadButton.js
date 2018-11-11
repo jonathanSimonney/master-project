@@ -33,21 +33,27 @@ export default class DownloadButton extends Component<Props> {
 
             //we should have a different musicDirs depending of whether we're on android or on ios
             // (fs.dirs.MusicDir doesn't work on ios. We'll have to interact with itunes in order to make an app useful for ios.
-            // const musicDirs = Platform.select({
-            //     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-            //     android: fs.dirs.MusicDir
-            // });
-            const musicDirs = fs.dirs.MusicDir;
+            const musicDirs = Platform.select({
+                ios: fs.dirs.DocumentDir + '/music',
+                android: fs.dirs.MusicDir
+            });
             console.log(musicDirs);
-            let options = {
-                fileCache: true,
-                addAndroidDownloads : {
-                    useDownloadManager : true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
-                    notification : false,
-                    path:  musicDirs + `/${fileName}.mp3`, // this is the path where your downloaded file will live in
-                    description : 'Downloading music.'
+            let options = Platform.select({
+                ios: {
+                    fileCache: true,
+                    path: musicDirs + `/${fileName}.mp3`, // this is the path where your downloaded file will live in
+                },
+                android: {
+                    fileCache: true,
+                    addAndroidDownloads: {
+                        useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
+                        notification: false,
+                        path: musicDirs + `/${fileName}.mp3`, // this is the path where your downloaded file will live in
+                        description: 'Downloading music.'
+                    }
                 }
-            };
+            });
+
             config(options).fetch('GET', apiUrl)
                 .then((res) => {
                     //make (or callback ?) what you want once the download is completed.
