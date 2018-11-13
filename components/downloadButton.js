@@ -2,7 +2,7 @@ import {Component} from "react";
 import {Button, Alert, Platform} from "react-native";
 import React from "react";
 import RNFetchBlob from 'rn-fetch-blob'
-import { PermissionsAndroid, Vibration, NetInfo } from 'react-native';
+import { PermissionsAndroid, Vibration, NetInfo, AsyncStorage } from 'react-native';
 
 export default class DownloadButton extends Component<Props> {
     //we check that : there is network AND that it is a wifi network
@@ -83,6 +83,9 @@ export default class DownloadButton extends Component<Props> {
             .then((res) => {
                 //make (or callback ?) what you want once the download is completed.
                 this.props.endDownload()
+
+                AsyncStorage.setItem(fileName, "saved")
+
                 Alert.alert("download completed?")
                 Vibration.vibrate(1000);
             })
@@ -92,8 +95,14 @@ export default class DownloadButton extends Component<Props> {
             })
     }
 
-    downloadVideo(result, youtubeUrl, fileName){//does the download if result is true, and display an error message otherwise
+    async downloadVideo(result, youtubeUrl, fileName){//does the download if result is true, and display an error message otherwise
         if (result){
+            const value = await AsyncStorage.getItem(fileName)
+            if (value !== null){
+                Alert.alert("this name is already taken, please choose a different name")
+                return;
+            }
+
             this.checkNetwork()
                 .then(result => {
                     if (result === "none"){
@@ -119,7 +128,7 @@ export default class DownloadButton extends Component<Props> {
     dlVideoToMp3(youtubeUrl, fileName){
         this.requestFileStoragePermission()
             .then(result => {
-                this.downloadVideo(result, youtubeUrl, fileName)
+                this.downloadVideo(result, youtubeUrl, fileName).catch(err => this.unknownError(err))
             })
             .catch(error => {
                 console.error(error);

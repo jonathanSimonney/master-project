@@ -48,7 +48,7 @@ export default class App extends Component<Props> {
                 <Text style={styles.welcome}>Welcome to React Native!</Text>
                 <Text style={styles.instructions}>To get started, edit App.js</Text>
                 <Text style={styles.instructions}>{instructions}</Text>
-                <DownloadButton videoUrl={"https://youtu.be/yo-IQEYcQuY"}  fileName={"I want to break free"}
+                <DownloadButton videoUrl={"https://youtu.be/yo-IQEYcQuY"}  fileName={"rez"}
                                 startDownload={() => {
                                     this.startDownload()
                                 }}
