@@ -2,7 +2,7 @@ import {Component} from "react";
 import {Button, Alert, Platform} from "react-native";
 import React from "react";
 import RNFetchBlob from 'rn-fetch-blob'
-import { PermissionsAndroid } from 'react-native';
+import { PermissionsAndroid, Vibration } from 'react-native';
 
 export default class DownloadButton extends Component<Props> {
     //we ask for the permission to access the user file storage
@@ -58,10 +58,12 @@ export default class DownloadButton extends Component<Props> {
                 .then((res) => {
                     //make (or callback ?) what you want once the download is completed.
                     Alert.alert("download completed?")
+                    Vibration.vibrate(1000);
                 })
                 .catch(err => {
                     console.warn(err.message);
                     Alert.alert("download NOT completed?")
+                    Vibration.vibrate(1000);
                 })
         }else{
             Alert.alert("We can't do anything without your consent...")
