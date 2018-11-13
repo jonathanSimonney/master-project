@@ -76,13 +76,18 @@ export default class DownloadButton extends Component<Props> {
             }
         });
 
-        config(options).fetch('GET', apiUrl)
+        this.props.startDownload()
+
+        config(options)
+            .fetch('GET', apiUrl)
             .then((res) => {
                 //make (or callback ?) what you want once the download is completed.
+                this.props.endDownload()
                 Alert.alert("download completed?")
                 Vibration.vibrate(1000);
             })
             .catch(err => {
+                this.props.endDownload()
                 this.unknownError(err)
             })
     }
