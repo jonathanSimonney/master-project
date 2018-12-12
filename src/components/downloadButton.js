@@ -3,6 +3,7 @@ import {Button, Alert, Platform} from "react-native";
 import React from "react";
 import RNFetchBlob from 'rn-fetch-blob'
 import { PermissionsAndroid, Vibration, NetInfo, AsyncStorage } from 'react-native';
+import setFileAuthor from "../services/tagsHelper";
 
 export default class DownloadButton extends Component<Props> {
     //we check that : there is network AND that it is a wifi network
@@ -49,7 +50,7 @@ export default class DownloadButton extends Component<Props> {
         Vibration.vibrate(1000);
     }
 
-    effectivelyDownloadVideo(youtubeUrl, fileName){//really does the entire download (NOT responsible for asking permission, checking connection, etc.)
+    effectivelyDownloadVideo(youtubeUrl, fileName, fileAuthor){//really does the entire download (NOT responsible for asking permission, checking connection, etc.)
         const apiUrl = `https://master-project-api.herokuapp.com/api/dl/${encodeURIComponent(youtubeUrl)}/${encodeURIComponent(fileName)}`;
         const { config, fs } = RNFetchBlob;
 
@@ -83,6 +84,7 @@ export default class DownloadButton extends Component<Props> {
             .then((res) => {
                 //make (or callback ?) what you want once the download is completed.
                 this.props.endDownload()
+                setFileAuthor(res.path, fileAuthor)
 
                 AsyncStorage.setItem(fileName, "saved")
 
@@ -95,7 +97,7 @@ export default class DownloadButton extends Component<Props> {
             })
     }
 
-    async downloadVideo(result, youtubeUrl, fileName){//does the download if result is true, and display an error message otherwise
+    async downloadVideo(result, youtubeUrl, fileName, fileAuthor){//does the download if result is true, and display an error message otherwise
         if (result){
             const value = await AsyncStorage.getItem(fileName)
             if (value !== null){
@@ -112,7 +114,7 @@ export default class DownloadButton extends Component<Props> {
                         //meanwhile, tell him why we won't dl
                         Alert.alert("we won't download while you're not using wifi, for a file is a heavy thing to download")
                     }else{
-                        this.effectivelyDownloadVideo(youtubeUrl, fileName)
+                        this.effectivelyDownloadVideo(youtubeUrl, fileName, fileAuthor)
                     }
                     //
                 })
@@ -125,10 +127,10 @@ export default class DownloadButton extends Component<Props> {
     }
 
     // download the video in a mp3 format
-    dlVideoToMp3(youtubeUrl, fileName){
+    dlVideoToMp3(youtubeUrl, fileName, fileAuthor){
         this.requestFileStoragePermission()
             .then(result => {
-                this.downloadVideo(result, youtubeUrl, fileName).catch(err => this.unknownError(err))
+                this.downloadVideo(result, youtubeUrl, fileName, fileAuthor).catch(err => this.unknownError(err))
             })
             .catch(error => {
                 console.error(error);
@@ -137,6 +139,6 @@ export default class DownloadButton extends Component<Props> {
     }
 
     render() {
-        return <Button title={"click me"} onPress={() => this.dlVideoToMp3(this.props.videoUrl, this.props.fileName)}/>;
+        return <Button title={"click me"} onPress={() => this.dlVideoToMp3(this.props.videoUrl, this.props.fileName, this.props.fileAuthor)}/>;
     }
 }

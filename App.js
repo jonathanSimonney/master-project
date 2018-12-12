@@ -6,8 +6,8 @@
  * @flow
  */
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Animated, ActivityIndicator} from 'react-native';
-import DownloadButton from './components/downloadButton';
+import {Platform, StyleSheet, Text, View, Animated, ActivityIndicator, TextInput} from 'react-native';
+import DownloadButton from './src/components/downloadButton';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -17,7 +17,12 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<Props> {
-    state = { loading: false, fadeAnim: new Animated.Value(0)}
+    state = {
+        loading: false,
+        fadeAnim: new Animated.Value(0),
+        musicTitle: "kashmir",
+        musicAuthor: "led zeppelin"
+    }
 
     startDownload(){
         this.setState({loading: true})
@@ -46,9 +51,21 @@ export default class App extends Component<Props> {
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>Welcome to React Native!</Text>
-                <Text style={styles.instructions}>To get started, edit App.js</Text>
-                <Text style={styles.instructions}>{instructions}</Text>
-                <DownloadButton videoUrl={"https://youtu.be/yo-IQEYcQuY"}  fileName={"rez"}
+                <Text style={styles.instructions}>title of the music file : </Text>
+                <TextInput
+                    accessibilityLabel={"name of the music filename when the music will be downloaded"}
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(musicTitle) => this.setState({musicTitle})}
+                    value={this.state.musicTitle}
+                />
+                <Text style={styles.instructions}>title of the author : </Text>
+                <TextInput
+                    accessibilityLabel={"name of the author of the music when the music will be downloaded"}
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(musicAuthor) => this.setState({musicAuthor})}
+                    value={this.state.musicAuthor}
+                />
+                <DownloadButton videoUrl={"https://youtu.be/sfR_HWMzgyc"}  fileName={this.state.musicTitle} fileAuthor={this.state.musicAuthor}
                                 startDownload={() => {
                                     this.startDownload()
                                 }}
