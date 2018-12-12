@@ -5,9 +5,9 @@
  * @format
  * @flow
  */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, Alert} from 'react-native';
+import {Platform, StyleSheet, Text, View, Animated, ActivityIndicator} from 'react-native';
+import DownloadButton from './components/downloadButton';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,22 +16,55 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
 export default class App extends Component<Props> {
-  static dlVideoToMp3(videoUrl){
-    Alert.alert(videoUrl)
-  }
+    state = { loading: false, fadeAnim: new Animated.Value(0)}
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <Button title={"click me"} onPress={App.dlVideoToMp3("https://youtu.be/g2N0TkfrQhY")}/>
-      </View>
-    );
-  }
+    startDownload(){
+        this.setState({loading: true})
+        Animated.timing(                  // Animate over time
+            this.state.fadeAnim,            // The animated value to drive
+            {
+                toValue: 1,                   // Animate to opacity: 1 (opaque)
+                duration: 10000,              // Make it take a while
+            }
+        ).start();
+    }
+
+    endDownload(){
+        console.log("download ended")
+        this.setState({loading: false})
+        Animated.timing(                  // Animate over time
+            this.state.fadeAnim,            // The animated value to drive
+            {
+                toValue: 0,                   // Animate to opacity: 0 (opaque)
+                duration: 10000,              // Make it take a while
+            }
+        ).start();
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.welcome}>Welcome to React Native!</Text>
+                <Text style={styles.instructions}>To get started, edit App.js</Text>
+                <Text style={styles.instructions}>{instructions}</Text>
+                <DownloadButton videoUrl={"https://youtu.be/yo-IQEYcQuY"}  fileName={"rez"}
+                                startDownload={() => {
+                                    this.startDownload()
+                                }}
+                                endDownload={() => this.endDownload()}
+                />
+
+                <Animated.View style={
+                    {
+                        opacity: this.state.fadeAnim,         // Bind opacity to animated value
+                    }
+                }>
+                    <ActivityIndicator color="#000000" size="large"/>
+                </Animated.View>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
