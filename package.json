@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "react": "16.4.1",
-    "react-native": "0.56.0"
+    "react-native": "0.56.0",
+    "react-native-modalbox": "^1.6.0",
+    "react-native-share-extension": "^1.2.1"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
