@@ -3,7 +3,6 @@ import {Button, Alert, Platform} from "react-native";
 import React from "react";
 import RNFetchBlob from 'rn-fetch-blob'
 import { PermissionsAndroid, Vibration, NetInfo, AsyncStorage } from 'react-native';
-import setFileAuthor from "../services/tagsHelper";
 
 export default class DownloadButton extends Component<Props> {
     //we check that : there is network AND that it is a wifi network
@@ -51,7 +50,7 @@ export default class DownloadButton extends Component<Props> {
     }
 
     effectivelyDownloadVideo(youtubeUrl, fileName, fileAuthor){//really does the entire download (NOT responsible for asking permission, checking connection, etc.)
-        const apiUrl = `https://master-project-api.herokuapp.com/api/dl/${encodeURIComponent(youtubeUrl)}/${encodeURIComponent(fileName)}`;
+        const apiUrl = `https://master-project-api.herokuapp.com/api/dl/${encodeURIComponent(youtubeUrl)}/${encodeURIComponent(fileName)}/${encodeURIComponent(fileAuthor)}`;
         const { config, fs } = RNFetchBlob;
 
         //we should have a different musicDirs depending of whether we're on android or on ios
@@ -84,7 +83,6 @@ export default class DownloadButton extends Component<Props> {
             .then((res) => {
                 //make (or callback ?) what you want once the download is completed.
                 this.props.endDownload()
-                setFileAuthor(res.path, fileAuthor)
 
                 AsyncStorage.setItem(fileName, "saved")
 

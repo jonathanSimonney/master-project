@@ -20,8 +20,8 @@ export default class App extends Component<Props> {
     state = {
         loading: false,
         fadeAnim: new Animated.Value(0),
-        musicTitle: "kashmir",
-        musicAuthor: "led zeppelin"
+        musicTitle: "child in time",
+        musicAuthor: "deep purple"
     }
 
     startDownload(){
@@ -58,14 +58,14 @@ export default class App extends Component<Props> {
                     onChangeText={(musicTitle) => this.setState({musicTitle})}
                     value={this.state.musicTitle}
                 />
-                <Text style={styles.instructions}>title of the author : </Text>
+                <Text style={styles.instructions}>name of the author : </Text>
                 <TextInput
                     accessibilityLabel={"name of the author of the music when the music will be downloaded"}
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                     onChangeText={(musicAuthor) => this.setState({musicAuthor})}
                     value={this.state.musicAuthor}
                 />
-                <DownloadButton videoUrl={"https://youtu.be/sfR_HWMzgyc"}  fileName={this.state.musicTitle} fileAuthor={this.state.musicAuthor}
+                <DownloadButton videoUrl={"https://youtu.be/PfAWReBmxEs"}  fileName={this.state.musicTitle} fileAuthor={this.state.musicAuthor}
                                 startDownload={() => {
                                     this.startDownload()
                                 }}
