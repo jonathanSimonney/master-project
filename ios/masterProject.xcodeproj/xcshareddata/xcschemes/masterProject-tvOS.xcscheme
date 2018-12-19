@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "mp3Manager-tvOS.app"
-               BlueprintName = "mp3Manager-tvOS"
-               ReferencedContainer = "container:mp3Manager.xcodeproj">
+               BuildableName = "masterProject-tvOS.app"
+               BlueprintName = "masterProject-tvOS"
+               ReferencedContainer = "container:masterProject.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "mp3Manager-tvOSTests.xctest"
-               BlueprintName = "mp3Manager-tvOSTests"
-               ReferencedContainer = "container:mp3Manager.xcodeproj">
+               BuildableName = "masterProject-tvOSTests.xctest"
+               BlueprintName = "masterProject-tvOSTests"
+               ReferencedContainer = "container:masterProject.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "mp3Manager-tvOSTests.xctest"
-               BlueprintName = "mp3Manager-tvOSTests"
-               ReferencedContainer = "container:mp3Manager.xcodeproj">
+               BuildableName = "masterProject-tvOSTests.xctest"
+               BlueprintName = "masterProject-tvOSTests"
+               ReferencedContainer = "container:masterProject.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "mp3Manager-tvOS.app"
-            BlueprintName = "mp3Manager-tvOS"
-            ReferencedContainer = "container:mp3Manager.xcodeproj">
+            BuildableName = "masterProject-tvOS.app"
+            BlueprintName = "masterProject-tvOS"
+            ReferencedContainer = "container:masterProject.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "mp3Manager-tvOS.app"
-            BlueprintName = "mp3Manager-tvOS"
-            ReferencedContainer = "container:mp3Manager.xcodeproj">
+            BuildableName = "masterProject-tvOS.app"
+            BlueprintName = "masterProject-tvOS"
+            ReferencedContainer = "container:masterProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "mp3Manager-tvOS.app"
-            BlueprintName = "mp3Manager-tvOS"
-            ReferencedContainer = "container:mp3Manager.xcodeproj">
+            BuildableName = "masterProject-tvOS.app"
+            BlueprintName = "masterProject-tvOS"
+            ReferencedContainer = "container:masterProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

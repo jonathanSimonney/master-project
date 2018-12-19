@@ -14,11 +14,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React Native!"
 
-@interface mp3ManagerTests : XCTestCase
+@interface masterProjectTests : XCTestCase
 
 @end
 
-@implementation mp3ManagerTests
+@implementation masterProjectTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

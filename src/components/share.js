@@ -12,6 +12,7 @@ import DownloadView from "../views/downloadView.js";
 
 export default class OriginalShare extends Component<Props> {
 	constructor(props, context) {
+		console.log("it's called!");
 		super(props, context)
 		this.state = {
 			type: '',
