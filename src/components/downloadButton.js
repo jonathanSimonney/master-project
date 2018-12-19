@@ -137,6 +137,6 @@ export default class DownloadButton extends Component<Props> {
     }
 
     render() {
-        return <Button title={"click me"} onPress={() => this.dlVideoToMp3(this.props.videoUrl, this.props.fileName, this.props.fileAuthor)}/>;
+        return <Button title={"click me"} onPress={() => this.dlVideoToMp3(this.props.videoUrl, this.props.fileName, this.props.fileAuthor)} accessibilityLabel={"click to download your mp3 file"}/>;
     }
 }
