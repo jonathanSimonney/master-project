@@ -25,6 +25,7 @@ export default class Share extends Component {
                 type,
                 value
             })
+            //ShareExtension.openURL('mp3managerapp://mp3manager/');
         } catch(e) {
             console.log('errrr', e)
         }

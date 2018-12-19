@@ -23,6 +23,7 @@ export default class App extends Component {
                 <Text style={styles.instructions}>
                     Cmd+D or shake for dev menu
                 </Text>
+                <Text style={styles.welcome}>uri : {value}</Text>
             </View>
         );
     }

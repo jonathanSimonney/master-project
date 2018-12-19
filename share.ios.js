@@ -5,7 +5,7 @@ import ShareExtension from 'react-native-share-extension'
 import {
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity, Button, Linking
 } from 'react-native'
 
 export default class Share extends Component {
@@ -50,6 +50,7 @@ export default class Share extends Component {
                             <Text>Close</Text>
                             <Text>type: { this.state.type }</Text>
                             <Text>value: { this.state.value }</Text>
+                            <Button title="Download it in Mp3Manager" onPress={ ()=>{ Linking.openURL('mp3manager://app/')}} />
                         </TouchableOpacity>
                     </View>
                 </View>
