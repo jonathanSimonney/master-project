@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">masterProject</string>
+    <string name="title_activity_share">Mp3Manager</string>
 </resources>
