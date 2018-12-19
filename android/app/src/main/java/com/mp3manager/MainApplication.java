@@ -1,4 +1,4 @@
-package com.masterproject;
+package com.mp3manager;
 
 import android.app.Application;
 import android.util.Log;

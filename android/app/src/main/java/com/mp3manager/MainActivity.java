@@ -1,4 +1,4 @@
-package com.masterproject;
+package com.mp3manager;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "masterProject";
+        return "mp3Manager";
     }
 }

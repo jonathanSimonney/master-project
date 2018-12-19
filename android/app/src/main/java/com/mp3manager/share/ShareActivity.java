@@ -1,5 +1,5 @@
 // define your share project, if your main project is com.sample1, then com.sample1.share makes sense....
-package com.masterproject.share;
+package com.mp3manager.share;
 
 
 // import ReactActivity

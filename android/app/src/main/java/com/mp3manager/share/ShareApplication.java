@@ -1,7 +1,7 @@
 // your package you defined in ShareActivity
-package com.masterproject.share;
+package com.mp3manager.share;
 // import build config
-import com.masterproject.BuildConfig;
+import com.mp3manager.BuildConfig;
 
 import com.alinz.parkerdan.shareextension.SharePackage;
 
@@ -10,6 +10,8 @@ import android.app.Application;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+
 import com.facebook.react.ReactPackage;
 
 import java.util.Arrays;
@@ -28,6 +30,7 @@ public class ShareApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+                    new RNFetchBlobPackage(),
                     new SharePackage()
             );
         }

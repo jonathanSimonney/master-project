@@ -6,7 +6,7 @@
  * @flow
  */
 import React, {Component} from 'react';
-import DownloadView from "./src/views/downloadView";
+import DownloadView from "./src/views/downloadView.js";
 
 export default class App extends Component<Props> {
 	render() {
