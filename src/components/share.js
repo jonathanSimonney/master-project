@@ -5,17 +5,22 @@ import ShareExtension from 'react-native-share-extension'
 import {
 	Text,
 	View,
-	TouchableOpacity
+	TouchableOpacity,
+	Platform
 } from 'react-native'
 import DownloadView from "../views/downloadView.js";
 
-export default class OriginalShare extends Component {
+export default class OriginalShare extends Component<Props> {
 	constructor(props, context) {
 		super(props, context)
 		this.state = {
 			type: '',
 			value: ''
 		}
+	}
+
+	getPlatform(){
+		return Platform.os //should not work, but better than nothing
 	}
 
 	async componentDidMount() {
@@ -26,7 +31,6 @@ export default class OriginalShare extends Component {
 				type,
 				value
 			})
-			//ShareExtension.openURL('mp3managerapp://mp3manager/');
 		} catch(e) {
 			console.log('errrr', e)
 		}
@@ -38,7 +42,7 @@ export default class OriginalShare extends Component {
 	render() {
 		return (
 			<View style={{ borderColor: 'green', borderWidth: 1, backgroundColor: 'white', height: 600, width: 300 }}>
-				<DownloadView videoUrl={this.state.value} musicTitle={"CHANGE THIS TITLE"} musicAuthor={"CHANGE THIS AUTHOR"}></DownloadView>
+				<DownloadView os={this.getPlatform()} videoUrl={this.state.value} musicTitle={"CHANGE THIS TITLE"} musicAuthor={"CHANGE THIS AUTHOR"}></DownloadView>
 				<TouchableOpacity onPress={this.onClose}>
 					<Text>Close</Text>
 					<Text>type: { this.state.type }</Text>

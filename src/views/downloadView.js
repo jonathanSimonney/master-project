@@ -63,6 +63,7 @@ export default class DownloadView extends Component<Props>{
 									this.startDownload()
 								}}
 								endDownload={() => this.endDownload()}
+								os={this.props.os}
 				/>
 
 				<Animated.View style={
